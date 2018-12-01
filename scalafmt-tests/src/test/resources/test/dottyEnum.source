@@ -1,0 +1,9 @@
+runner.dialect = Dotty
+maxColumn = 40 # configuration is defined at the top of the file
+<<< ONLY First test dotty enum
+enum Foo {
+
+
+ }
+>>>
+enum Foo {}

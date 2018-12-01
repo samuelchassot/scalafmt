@@ -6,7 +6,8 @@ import org.portablescala.sbtplatformdeps.PlatformDepsPlugin.autoImport._
 
 object Dependencies {
   val metaconfigV = "0.8.3"
-  val scalametaV = "4.0.0"
+  // val scalametaV = "4.0.0"
+  val scalametaV = "c72d1069-SNAPSHOT"
   val scalatestV = "3.2.0-SNAP10"
   val scalacheckV = "1.13.5"
   val coursier = "1.0.3"
@@ -18,7 +19,8 @@ object Dependencies {
     )
   }
 
-  val scalametaTestkit = "org.scalameta" %% "testkit" % scalametaV
+  // val scalametaTestkit = "org.scalameta" %% "testkit" % scalametaV
+  val scalametaTestkit = "org.scalameta" %% "testkit-experimental" % scalametaV
   val scalariform = "org.scalariform" %% "scalariform" % "0.1.8"
 
   val scalacheck = "org.scalacheck" %% "scalacheck" % scalacheckV
@@ -36,7 +38,8 @@ object Dependencies {
         // [error] one error found
         "org.scalameta" %%% "scalameta" % scalametaV
       case _ =>
-        "org.scalameta" %%% "scalameta" % scalametaV excludeAll scalapb.value
+        // "org.scalameta" %%% "scalameta" % scalametaV excludeAll scalapb.value
+        "org.scalameta" %%% "scalameta-experimental" % scalametaV excludeAll scalapb.value
     }
   }
   val metaconfig = Def.setting("com.geirsson" %%% "metaconfig-core" % metaconfigV)
