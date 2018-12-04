@@ -383,7 +383,7 @@ class Router(formatOps: FormatOps) {
           Split(modification, 0)
         )
       // Defn.{Object, Class, Trait}
-      case tok @ FormatToken(KwObject() | KwClass() | KwTrait(), _, _) =>
+      case tok @ FormatToken(KwObject() | KwClass() | KwTrait() | KwEnum(), _, _) =>
         val expire = defnTemplate(leftOwner)
           .flatMap(templateCurly)
           .getOrElse(leftOwner.tokens.last)
@@ -1404,7 +1404,12 @@ class Router(formatOps: FormatOps) {
         } else {
           Seq(Split(Space, 0))
         }
+      case FormatToken(KwCase(), _, _) if leftOwner.is[Defn.Enum.RepeatedCase] =>
+        Seq(
+          Split(Space, 0).withPolicy(SingleLineBlock(leftOwner.tokens.last))
+        )
       case FormatToken(Keyword() | Modifier(), _, _) =>
+        logger.elem(leftOwner, leftOwner.structure, formatToken, formatToken.left.structure, leftOwner.pos)
         Seq(
           Split(Space, 0)
         )

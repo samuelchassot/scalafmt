@@ -21,7 +21,7 @@ object Keyword {
     token.is[KwThrow] || token.is[KwTrait] || token.is[KwTrue] ||
     token.is[KwTry] || token.is[KwType] || token.is[KwVal] ||
     token.is[KwVar] || token.is[KwWhile] || token.is[KwWith] ||
-    token.is[KwYield]
+    token.is[KwYield] || token.is[KwEnum]
   }
 }
 

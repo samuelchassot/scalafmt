@@ -22,7 +22,9 @@ import scala.reflect.ClassTag
 import scala.reflect.classTag
 import org.scalafmt.Error
 import org.scalafmt.Error.UnexpectedTree
+import org.scalafmt.config.ScalafmtConfig
 import org.scalafmt.internal.FormatToken
+
 import scala.meta.Init
 
 /**
@@ -134,6 +136,7 @@ object TreeOps {
         case t: Decl.Def => addDefn[KwDef](t.mods, t)
         case t: Defn.Object => addDefn[KwObject](t.mods, t)
         case t: Defn.Trait => addDefn[KwTrait](t.mods, t)
+        case t: Defn.Enum => addDefn[KwEnum](t.mods, t)
         case t: Defn.Type => addDefn[KwType](t.mods, t)
         case t: Decl.Type => addDefn[KwType](t.mods, t)
         case t: Defn.Val => addDefn[KwVal](t.mods, t)
@@ -194,7 +197,9 @@ object TreeOps {
   def getOwners(tree: Tree): Map[TokenHash, Tree] = {
     val result = Map.newBuilder[TokenHash, Tree]
     def loop(x: Tree): Unit = {
+      logger.elem(x)
       x.tokens.foreach { tok =>
+        logger.elem(tok.structure)
         result += hash(tok) -> x
       }
       x.children.foreach(loop)
