@@ -328,8 +328,13 @@ class FormatOps(val tree: Tree, val initStyle: ScalafmtConfig) {
 
   def OneArgOneLineSplit(open: Token, noTrailingCommas: Boolean = false)(
       implicit line: sourcecode.Line): Policy = {
-    // TODO(olafur) clear queue between arguments, they are independent.
     val expire = matchingParentheses(hash(open))
+    SplitAtCommas(open, expire, noTrailingCommas)
+  }
+
+  def SplitAtCommas(open: Token, expire: Token, noTrailingCommas: Boolean = false)(
+      implicit line: sourcecode.Line): Policy = {
+    // TODO(olafur) clear queue between arguments, they are independent.
     Policy(
       {
         case d @ Decision(t @ FormatToken(left, comma @ Comma(), _), splits)

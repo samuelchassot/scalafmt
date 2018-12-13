@@ -1404,12 +1404,15 @@ class Router(formatOps: FormatOps) {
         } else {
           Seq(Split(Space, 0))
         }
-      case FormatToken(KwCase(), _, _) if leftOwner.is[Defn.Enum.RepeatedCase] =>
+      case FormatToken(left @ KwCase(), _, _) if leftOwner.is[Defn.Enum.RepeatedCase] =>
+        val expire = leftOwner.tokens.last
         Seq(
-          Split(Space, 0).withPolicy(SingleLineBlock(leftOwner.tokens.last))
+          Split(Space, 0).withPolicy(SingleLineBlock(expire)),
+          Split(Newline, 1)
+            .withIndent(2, expire, Left)
+            .withPolicy(SplitAtCommas(left, expire))
         )
       case FormatToken(Keyword() | Modifier(), _, _) =>
-        logger.elem(leftOwner, leftOwner.structure, formatToken, formatToken.left.structure, leftOwner.pos)
         Seq(
           Split(Space, 0)
         )

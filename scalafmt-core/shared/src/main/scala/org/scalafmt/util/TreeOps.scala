@@ -197,9 +197,7 @@ object TreeOps {
   def getOwners(tree: Tree): Map[TokenHash, Tree] = {
     val result = Map.newBuilder[TokenHash, Tree]
     def loop(x: Tree): Unit = {
-      logger.elem(x)
       x.tokens.foreach { tok =>
-        logger.elem(tok.structure)
         result += hash(tok) -> x
       }
       x.children.foreach(loop)

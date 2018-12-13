@@ -1,11 +1,37 @@
 # 40 columns                            |
 runner.dialect = Dotty
 maxColumn = 40 # configuration is defined at the top of the file
-<<< ONLY First test dotty enum
+<<< multi-line
 enum Foo {
-    case Aaaaaaaaaaaaaaaaaaaa, Bbbbbbbb, C, D, E
- }
+  case Aaaaaaaaaaaaaaaaaaaa, Bbbbbbbb, C, D, E
+}
 >>>
 enum Foo {
-    case Aaaaaaaaaaaaaaaaaaaa, Bbbbbbbbb, C, D, E
+  case
+    Aaaaaaaaaaaaaaaaaaaa,
+    Bbbbbbbb,
+    C,
+    D,
+    E
+}
+<<< single-line
+enum Foo {
+  case Aaaaaaaaaaaaaaaaaaaa, Bbbbbbbb
+}
+>>>
+enum Foo {
+  case Aaaaaaaaaaaaaaaaaaaa, Bbbbbbbb
+}
+<<< comments
+enum Foo {
+  case Aaaaaaaaaaaaaaaaaaaa,
+    // This is b
+    Bbbbbbbb
+}
+>>>
+enum Foo {
+  case
+    Aaaaaaaaaaaaaaaaaaaa,
+    // This is b
+    Bbbbbbbb
 }
