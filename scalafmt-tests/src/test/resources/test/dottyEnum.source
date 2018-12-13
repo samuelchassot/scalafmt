@@ -35,3 +35,13 @@ enum Foo {
     // This is b
     Bbbbbbbb
 }
+<<< ONLY enum
+enum Foo {
+  case A(a: Int)
+  case B(b: Int)
+}
+>>>
+enum Foo {
+  case A(a: Int)
+  case B(b: Int)
+}
