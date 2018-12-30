@@ -20,6 +20,7 @@ inThisBuild(
       )
     ),
     scalaVersion := scala212,
+    version := "SNAPSHOT",
     crossScalaVersions := List(scala212, scala211),
     resolvers += Resolver.sonatypeRepo("releases"),
     libraryDependencies ++= List(
@@ -27,6 +28,7 @@ inThisBuild(
       scalacheck % Test,
       scalametaTestkit % Test
     )
+    
   )
 )
 
@@ -77,7 +79,7 @@ lazy val core = crossProject(JVMPlatform, JSPlatform)
   )
   .enablePlugins(BuildInfoPlugin)
 lazy val coreJVM = core.jvm
-lazy val coreJS = core.js
+//lazy val coreJS = core.js
 
 lazy val cli = project
   .in(file("scalafmt-cli"))

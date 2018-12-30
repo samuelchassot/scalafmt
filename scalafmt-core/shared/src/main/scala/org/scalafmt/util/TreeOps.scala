@@ -131,6 +131,7 @@ object TreeOps {
     def loop(x: Tree): Unit = {
       x match {
         case t: Defn.Class => addDefn[KwClass](t.mods, t)
+        case t: Defn.Enum => addDefn[KwEnum](t.mods, t)
         case t: Defn.Def => addDefn[KwDef](t.mods, t)
         case t: Defn.Macro => addDefn[KwDef](t.mods, t)
         case t: Decl.Def => addDefn[KwDef](t.mods, t)
@@ -254,6 +255,7 @@ object TreeOps {
     */
   def isDefnSiteWithParams(tree: Tree): Boolean = tree match {
     case _: Decl.Def | _: Defn.Def | _: Defn.Macro | _: Defn.Class |
+        _: Defn.Enum |
         _: Defn.Trait | _: Ctor.Secondary =>
       true
     case x: Ctor.Primary =>
@@ -269,6 +271,7 @@ object TreeOps {
     */
   def isDefnSite(tree: Tree): Boolean = tree match {
     case _: Decl.Def | _: Defn.Def | _: Defn.Macro | _: Defn.Class |
+        _: Defn.Enum |
         _: Defn.Trait | _: Ctor.Secondary | _: Decl.Type | _: Defn.Type |
         _: Type.Apply | _: Type.Param | _: Type.Tuple | _: Defn.Enum.Case =>
       true
@@ -279,6 +282,7 @@ object TreeOps {
 
   def isBinPackDefnSite(tree: Tree): Boolean = tree match {
     case _: Decl.Def | _: Defn.Def | _: Defn.Macro | _: Defn.Class |
+        _: Defn.Enum |
         _: Defn.Trait | _: Ctor.Secondary | _: Defn.Type | _: Type.Apply |
         _: Type.Param | _: Type.Tuple =>
       true
@@ -359,6 +363,7 @@ object TreeOps {
     case t: Defn.Macro => t.name -> t.paramss.flatten
     case t: Decl.Def => t.name -> t.paramss.flatten
     case t: Defn.Class => t.name -> t.ctor.paramss.flatten
+    case t: Defn.Enum => t.name -> t.ctor.paramss.flatten
     case t: Defn.Trait => t.name -> t.ctor.paramss.flatten
     case t: Ctor.Primary => t.name -> t.paramss.flatten
     case t: Ctor.Secondary => t.name -> t.paramss.flatten

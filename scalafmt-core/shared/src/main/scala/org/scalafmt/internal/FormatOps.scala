@@ -789,11 +789,13 @@ class FormatOps(val tree: Tree, val initStyle: ScalafmtConfig) {
       owner match {
         case cls: meta.Defn.Class =>
           cls.tparams.nonEmpty && cls.ctor.paramss.nonEmpty
+        case cls: meta.Defn.Enum =>
+          cls.tparams.nonEmpty && cls.ctor.paramss.nonEmpty
         case _ => false
       }
     }
 
-    val isClassLike = owner.is[meta.Ctor.Primary] || owner.is[meta.Defn.Class]
+    val isClassLike = owner.is[meta.Ctor.Primary] || owner.is[meta.Defn.Class] || owner.is[Defn.Enum]
     val isTrait = owner.is[meta.Defn.Trait]
     val excludeClass = style.verticalMultiline.excludeDanglingParens
       .contains(DanglingExclude.`class`)

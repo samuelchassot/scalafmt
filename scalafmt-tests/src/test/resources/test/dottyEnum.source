@@ -47,14 +47,14 @@ enum Foo {
 }
 <<< enum case with constructor multiline
 enum Foo {
-  case A(aaaaaaaaaaa: Int, bbbbbbbbb: Int, cccccccccccc: Int)
+  case A(aaaaaaaaaaa: Int, bbbbbbbbbbb: Int, ccccccccccc: Int)
 }
 >>>
 enum Foo {
   case A(
       aaaaaaaaaaa: Int,
-      bbbbbbbbb: Int,
-      cccccccccccc: Int
+      bbbbbbbbbbb: Int,
+      ccccccccccc: Int
   )
 }
 
